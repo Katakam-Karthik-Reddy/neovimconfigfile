@@ -9,7 +9,4 @@ require("karthik.plugins.toggleterm")
 require("karthik.plugins.telescope")
 require("karthik.plugins.lsp.cmp")
 require("karthik.plugins.lsp.autopairs")
--- require("karthik.plugins.nvim-cmp")
--- require("karthik.plugins.lsp.lspsaga")
--- require("karthik.plugins.lsp.lspconfig")
-
+require("karthik.plugins.treesitter")

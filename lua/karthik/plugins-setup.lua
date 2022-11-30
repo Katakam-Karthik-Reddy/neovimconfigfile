@@ -32,9 +32,9 @@ end
 return packer.startup(function(use)
   use('wbthomason/packer.nvim')
 
-  -- lua functions that many plugins use
-  use('nvim-lua/plenary.nvim') 
-  
+  -- lua functions that many plugins used
+  use('nvim-lua/plenary.nvim')
+
   -- preferred colorscheme
   use('bluz71/vim-nightfly-guicolors')
 
@@ -48,16 +48,16 @@ return packer.startup(function(use)
 
   -- commenting with gc
   use('numToStr/Comment.nvim')
-  
+
   -- file explorer
   use('nvim-tree/nvim-tree.lua')
 
   -- statusline
   use('nvim-lualine/lualine.nvim')
-   
+
   -- toggleterminal
-  use('akinsho/toggleterm.nvim') 
-  
+  use('akinsho/toggleterm.nvim')
+
   -- fuzzy finding
   -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use({ 'nvim-telescope/telescope.nvim', branch = '0.1.x' })
@@ -65,6 +65,7 @@ return packer.startup(function(use)
   --mason is a lsp manager
   -- use 'williamboman/mason.nvim'
   -- use 'williamboman/mason-lspconfig.nvim'
+
   -- lsp installer
   use('williamboman/nvim-lsp-installer')
   -- language server
@@ -78,7 +79,9 @@ return packer.startup(function(use)
  -- For vsnip users.
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
-  
+
+  --treesitter for codehighlighting
+  use('nvim-treesitter/nvim-treesitter')
   --paring of brackets in lsp 
   use 'windwp/nvim-autopairs'
 
@@ -95,7 +98,7 @@ return packer.startup(function(use)
  -- For snippy users.
  -- use 'dcampos/nvim-snippy'
  -- use 'dcampos/cmp-snippy'
- 
+
   -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()

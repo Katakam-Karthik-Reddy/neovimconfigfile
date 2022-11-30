@@ -9,6 +9,19 @@ keymap.set('v', 'jk', '<ESC>', { noremap = true })
 -- clear search highlighs 
 keymap.set('n', '<leader>nh', ':nohl<CR>')
 
+--save and quit
+keymap.set('n', '<leader>w', ':w<CR>')
+keymap.set('n', '<leader>q', ':q<CR>')
+
+
+--indent and opposite
+-- keymap.set('v', '<', '<C ->>', { noremap = true, silent = false })
+-- keymap.set('v', '>', '<C -< >', { noremap = true, silent = false })
+
+-- changing arrow keys for nevigation in insertion mode
+keymap.set('i', '<A-h>', '<up>')
+--commenting
+-- keymap.set('n', '<leader>z', 'gcc', {noremap = true, silent = false})
 -- deletes character but don't copy it to register
 -- keymap.set('n', 'x', '_x')
 
