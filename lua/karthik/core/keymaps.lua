@@ -2,38 +2,40 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
---main
+-- main
 keymap.set('i', 'jk', '<ESC>', { noremap = true })
+--keymap.set('i', 'JK', '<ESE>', { noremap = true })
+--keymap.set('i', 'jK', '<ESE>', { noremap = true })
+--keymap.set('i', 'Jk', '<ESE>', { noremap = true })
 keymap.set('v', 'jk', '<ESC>', { noremap = true })
+--keymap.set('v', 'JK', '<ESE>', { noremap = true })
+--keymap.set('v', 'jK', '<ESE>', { noremap = true })
+--keymap.set('v', 'jK', '<ESE>', { noremap = true })
 
--- clear search highlighs 
-keymap.set('n', '<leader>nh', ':nohl<CR>')
-
---save and quit
+-- save and quit
 keymap.set('n', '<leader>w', ':w<CR>')
 keymap.set('n', '<leader>q', ':q<CR>')
 
+--clear search highlight
+keymap.set('n', '<leader>nh', ':nohl<CR>')
 
---indent and opposite
--- keymap.set('v', '<', '<C ->>', { noremap = true, silent = false })
--- keymap.set('v', '>', '<C -< >', { noremap = true, silent = false })
+--cursor moving in insert mode
+--keymap.set('i', '<C-l>', '<right>')
+--keymap.set('i', '<C-j>', '<down>')
+--keymap.set('i', '<C-h>', '<left>')
+--keymap.set('i', '<C-k>', '<up>')
 
--- changing arrow keys for nevigation in insertion mode
-keymap.set('i', '<A-h>', '<up>')
---commenting
--- keymap.set('n', '<leader>z', 'gcc', {noremap = true, silent = false})
--- deletes character but don't copy it to register
--- keymap.set('n', 'x', '_x')
+--split window
+keymap.set('n', '<leader>sv', '<C-w>v') -- split window into vertical
+keymap.set('n', '<leader>sh', '<C-w>s') -- split window into vertical
+keymap.set('n', '<leader>se', '<C-w>=') -- split window into vertical
+keymap.set('n', '<leader>sx', ':close<CR>') -- close the window
 
--- increase and decrease the numbers
-keymap.set('n', '<leader>+' , '<C-a>')
-keymap.set('n', '<leader>-' , '<C-x>')
-
--- split windows
-keymap.set('n', '<leader>sv', '<C-w>v') -- splits window into vertical mode
-keymap.set('n', '<leader>sh', '<C-w>s') -- splits window into horizontal mode
-keymap.set('n', '<leader>se', '<C-w>=') -- sets width or height equal
-keymap.set('n', '<leader>sx', ':close<CR>') -- closes the split window
+--window navigations
+keymap.set('n', "<C-h>", '<C-w>h', { noremap = true } )
+keymap.set('n', "<C-j>", '<C-w>j', { noremap = true } )
+keymap.set('n', "<C-k>", '<C-w>k', { noremap = true } )
+keymap.set('n', "<C-l>", '<C-w>l', { noremap = true } )
 
 -- tab controll
 keymap.set('n', '<leader>to', ':tabnew<CR>')
@@ -41,25 +43,45 @@ keymap.set('n', '<leader>tx', ':tabclose<CR>')
 keymap.set('n', '<leader>tn', ':tabn<CR>')
 keymap.set('n', '<leader>tp', ':tabp<CR>')
 
--- to maximize and to previous size
-keymap.set('n', '<leader>sm', ':MaximizerToggle<CR>')
+-- tab navigations
+keymap.set('n', '<leader>1', '1gt')
+keymap.set('n', '<leader>2', '2gt')
+keymap.set('n', '<leader>3', '3gt')
+keymap.set('n', '<leader>4', '4gt')
+keymap.set('n', '<leader>5', '5gt')
+keymap.set('n', '<leader>6', '6gt')
+keymap.set('n', '<leader>7', '7gt')
+keymap.set('n', '<leader>7', '8gt')
+keymap.set('n', '<leader>8', '8gt')
+keymap.set('n', '<leader>0', '0gt')
 
--- nvim-tree
-keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
+
+--to move the block of code in visual mode
+keymap.set('v', "J", ":m '>+1<CR>gv=gv")
+keymap.set('v', "K", ":m '<-2<CR>gv=gv")
+
+-- to make cursor to be in middle of the screen
+keymap.set('n', '<C-d>', '<C-d>zz')
+keymap.set('n', '<C-u>', '<C-u>zz')
+keymap.set('n', 'n', 'nzzzv')
+keymap.set('n', 'N', 'Nzzzv')
+
+-- it paste the text after send the highlighted text into void register
+keymap.set('x', '<leader>p', "\"_dp")
+
+-- to copy to clipborad
+keymap.set('n', '<leader>y', "\"+y")
+keymap.set('v', '<leader>y', "\"+y")
+keymap.set('n', '<leader>Y', "\"+Y")
 
 
--- telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>")
-keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>")
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+--nvim tree
+keymap.set('n', '<leader>e', ":NvimTreeToggle<CR>")
 
--- diagnostics
-vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
--- The following command requires plug-ins "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", and optionally "kyazdani42/nvim-web-devicons" for icon support
-vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>Telescope diagnostics<CR>', { noremap = true, silent = true })
--- If you don't want to use the telescope plug-in but still want to see all the errors/warnings, comment out the telescope line and uncomment this:
--- vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
+
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
+keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
+keymap.set("n", "<C-p>", "<cmd>Telescope git_files<CR>")
+keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
+
+
