@@ -1,4 +1,4 @@
-------------------------------------------keymaps -----------------------------------------------
+-----------------------------------------keymaps -----------------------------------------------
 vim.g.mapleader = " "
 local keymap = vim.keymap
 
@@ -157,6 +157,11 @@ require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         "sharkdp/fd",
         "nvim-treesitter/nvim-treesitter",
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        after = "nvim-treesitter",
+        requires = "nvim-treesitter/nvim-treesitter",
     },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.4',
@@ -345,6 +350,8 @@ vim.keymap.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_fi
 vim.keymap.set('n', '<leader>fds', "<cmd>lua require('telescope.builtin').live_grep({layout_config={horizontal={previewer={width=0.7}}}})<CR>", {})
 vim.keymap.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<CR>", {})
 vim.keymap.set('n', '<leader>fs', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find({ previewer=false, shorten_path=true, layout_config={ width=0.8, height=0.95}})<CR>", {})
+vim.keymap.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').search_history()<CR>", {})
+vim.keymap.set('n', '<leader>fdd', "<cmd>lua require('telescope.builtin').diagnostics()<CR>", {})
 -- vim.keymap.set('n', '<leader>fds', "<cmd>lua require('telescope.builtin').
 --vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fc', "<cmd>lua require('telescope.builtin').commands()<CR>", {})
@@ -603,6 +610,55 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
+
+
+------------------------------------- treesitter-textobjects---------------------------------------
+
+require'nvim-treesitter.configs'.setup {
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        -- You can optionally set descriptions to the mappings (used in the desc parameter of
+        -- nvim_buf_set_keymap) which plugins like which-key display
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+        -- You can also use captures from other query groups like `locals.scm`
+        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+      },
+      -- You can choose the select mode (default is charwise 'v')
+      --
+      -- Can also be a function which gets passed a table with the keys
+      -- * query_string: eg '@function.inner'
+      -- * method: eg 'v' or 'o'
+      -- and should return the mode ('v', 'V', or '<c-v>') or a table
+      -- mapping query_strings to modes.
+      selection_modes = {
+        ['@parameter.outer'] = 'v', -- charwise
+        ['@function.outer'] = 'V', -- linewise
+        ['@class.outer'] = '<c-v>', -- blockwise
+      },
+      -- If you set this to `true` (default is `false`) then any textobject is
+      -- extended to include preceding or succeeding whitespace. Succeeding
+      -- whitespace has priority in order to act similarly to eg the built-in
+      -- `ap`.
+      --
+      -- Can also be a function which gets passed a table with the keys
+      -- * query_string: eg '@function.inner'
+      -- * selection_mode: eg 'v'
+      -- and should return true of false
+      include_surrounding_whitespace = true,
+    },
+  },
+}
+
 
 ---------------------------------------- commenter ------------------------------------------------
 
